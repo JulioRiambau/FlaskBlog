@@ -1,0 +1,58 @@
+{% from 'bootstrap5/form.html' import render_form, render_field %}
+
+
+
+{% include "header.html" %}
+{% block content %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/edit-bg.jpg')}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            {% if is_edit: %}
+            <h1>Edit Post</h1>
+            {% else: %}
+            <h1>New Post</h1>
+            {% endif %}
+            <span class="subheading">You're going to make a great blog post!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+         test
+          {% if requested_post %}
+
+              <form method="post">
+                {{ form.csrf_token() }}
+                {{ render_field(form.title, value=requested_post.title) }}
+                {{ render_field(form.subtitle, value=requested_post.subtitle) }}
+                {{ render_field(form.subtitle, value=requested_post.subtitle) }}
+                {{ render_field(form.author, value=requested_post.author) }}
+                {{ render_field(form.img_url, value=requested_post.img_url) }}
+                {{ ckeditor.create(value=requested_post.body) }}
+                {{ render_field(form.submit) }}
+
+            </form>
+
+
+            {% else %}
+              {{ render_form(form, novalidate=True)}}
+          {% endif %}
+
+
+      </div>
+    </div>
+  </div>
+
+  {{ ckeditor.load() }}
+
+
+{% endblock %}
+{% include "footer.html" %}

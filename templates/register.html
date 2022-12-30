@@ -1,0 +1,45 @@
+
+{% include "header.html" %}
+<header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1531592937781-344ad608fabf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Register</h1>
+            <span class="subheading">Start Contributing to the Blog!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% block content %}
+
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+	<h1>Register</h1>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('register') }}" method="post">
+        {{ form.csrf_token }}
+    	<input type="text" name="name" placeholder="Name" required="required" />
+		<input type="email" name="email" placeholder="Email" required="required" />
+        <input type="password" name="password" placeholder="Password" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Sign me up.</button>
+    </form>
+</div>
+    </div>
+  </div>
+
+{% endblock %}
+{% include "footer.html" %}
